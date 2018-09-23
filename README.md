@@ -1,3 +1,5 @@
+### docker-compose.yml 文件如下
+
 ```
 web:
   image: 'gitlab/gitlab-ce:latest'

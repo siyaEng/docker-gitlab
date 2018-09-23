@@ -1,0 +1,24 @@
+```
+web:
+  image: 'gitlab/gitlab-ce:latest'
+  container_name: 'gitlab'
+  restart: always
+  hostname: 'localgitlab.com'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://localgitlab.com'
+      gitlab_rails['gitlab_shell_ssh_port'] = 30001
+      gitlab_rails['gitlab_ssh_host'] = 'localgitlab.com'
+      gitlab_rails['gitlab_default_can_create_group'] = true
+      gitlab_rails['gitlab_username_changing_enabled'] = true
+  ports:
+    - '30000:80'
+    - '30001:22'
+    - '30002:443'
+  volumes:
+    - '{$HOME}/gitlab/config:/etc/gitlab'
+    - '{$HOME}/gitlab/logs:/var/log/gitlab' 
+    - '{$HOME}/gitlab/data:/var/opt/gitlab'
+```
+
+### 改变 $HOME 变成你的路径即可，并且保证 gitlab 有读写权限

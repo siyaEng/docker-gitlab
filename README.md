@@ -1,4 +1,4 @@
-[chinese lanuage](https://github.com/siyaEng/docker-gitlab/blob/master/README.md)
+[chinese lanuage](https://github.com/siyaEng/docker-gitlab/blob/master/README_ZH.md)
 
 ### edit ```.env```  to yourself
 

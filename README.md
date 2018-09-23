@@ -1,36 +1,48 @@
-### docker-compose.yml 文件如下
+### edit ```.env```  to yourself
 
 ```
-web:
-  image: 'gitlab/gitlab-ce:latest'
-  container_name: 'gitlab'
-  restart: always
-  hostname: 'localgitlab.com'
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://localgitlab.com'
-      gitlab_rails['gitlab_shell_ssh_port'] = 30001
-      gitlab_rails['gitlab_ssh_host'] = 'localgitlab.com'
-      gitlab_rails['gitlab_default_can_create_group'] = true
-      gitlab_rails['gitlab_username_changing_enabled'] = true
-  ports:
-    - '30000:80' # web 端口
-    - '30001:22' # ssh 端口
-    - '30002:443'# https 端口
-  volumes:
-    - '{$HOME}/gitlab/config:/etc/gitlab'
-    - '{$HOME}/gitlab/logs:/var/log/gitlab' 
-    - '{$HOME}/gitlab/data:/var/opt/gitlab'
+GITLAB_URL=localgitlab.com
+GITLAB_HTTP_URL=http://localgitlab.com
+GITLAB_URL=localgitlab.com
+GITLAB_DEFAULT_CAN_CREATE_GROUP=true
+GITLAB_USERNAME_CHANGING_ENABLED=true
+GITLAB_WEB_PORT=30000
+GITLAB_SHELL_SSH_PORT=30001
+GITLAB_HTTPS_PORT=30002
 ```
 
-### 启动步骤
+### about ${HOME}
 
-#### 1.改变 $HOME 变成你的路径即可，并且保证 gitlab 有读写权限
+you can change ${HOME} to your directory, make sure you have writable and readable
 
-#### 2.配置 hostname 位你的访问地址
+### about VOLUMES
 
-#### 3.执行 docker-compose up --build 前台启动
+```
+volumes:
+    - '${HOME}/gitlab/config:/etc/gitlab'  #gitlab config
+    - '${HOME}/gitlab/logs:/var/log/gitlab'#gitlab logs
+    - '${HOME}/gitlab/data:/var/opt/gitlab'#gitlab datas
+```
+all about gitlab info is volumed ${HOME}/gitlab，so it is very import to you.
 
-#### 4.执行 docker-compose up -d 后台启动
+### build step
 
-#### 5.访问 {hostname}:{port} 比如我的 http://localgitlab.com：30000 就是 gitlab 访问地址
+#### 1. change path to the docker-gitlab project 
+```cd ${docker-gitlab-project}```
+
+#### 2.run a command nodeamon
+```docker-compose up --build```
+
+#### or run a command deamon
+```docker-compose up -d```
+
+#### 3.check the contain status
+```docker ps```
+
+```
+CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS                            PORTS                                                                  NAMES
+a347ed312115        gitlab/gitlab-ce:latest   "/assets/wrapper"   17 minutes ago      Up 3 seconds (health: starting)   0.0.0.0:30001->22/tcp, 0.0.0.0:30000->80/tcp, 0.0.0.0:30002->443/tcp   gitlab
+```
+#### 4. view {hostname}:{port} on web
+
+like ```http://localgitlab.com：30000``` is my gitlab-web address

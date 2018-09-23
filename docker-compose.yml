@@ -2,19 +2,19 @@ web:
   image: 'gitlab/gitlab-ce:latest'
   container_name: 'gitlab'
   restart: always
-  hostname: 'localgitlab.com'
+  hostname: '${GITLAB_URL}'
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://localgitlab.com'
-      gitlab_rails['gitlab_shell_ssh_port'] = 30001
-      gitlab_rails['gitlab_ssh_host'] = 'localgitlab.com'
-      gitlab_rails['gitlab_default_can_create_group'] = true
-      gitlab_rails['gitlab_username_changing_enabled'] = true
+      external_url '${GITLAB_HTTP_URL}'
+      gitlab_rails['gitlab_shell_ssh_port'] = ${GITLAB_SHELL_SSH_PORT}
+      gitlab_rails['gitlab_ssh_host'] = '${GITLAB_URL}'
+      gitlab_rails['gitlab_default_can_create_group'] = ${GITLAB_DEFAULT_CAN_CREATE_GROUP}
+      gitlab_rails['gitlab_username_changing_enabled'] = ${GITLAB_USERNAME_CHANGING_ENABLED}
   ports:
-    - '30000:80'
-    - '30001:22'
-    - '30002:443'
+    - '${GITLAB_WEB_PORT}:80'
+    - '${GITLAB_SHELL_SSH_PORT}:22'
+    - '${GITLAB_HTTPS_PORT}:443'
   volumes:
-    - '$HOME/gitlab/config:/etc/gitlab'
-    - '$HOME/gitlab/logs:/var/log/gitlab'
-    - '$HOME/gitlab/data:/var/opt/gitlab'
+    - '${HOME}/gitlab/config:/etc/gitlab'
+    - '${HOME}/gitlab/logs:/var/log/gitlab'
+    - '${HOME}/gitlab/data:/var/opt/gitlab'

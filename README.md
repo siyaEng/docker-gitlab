@@ -1,3 +1,5 @@
+[chinese](https://github.com/siyaEng/docker-gitlab/blob/master/README.md)
+
 ### edit ```.env```  to yourself
 
 ```

@@ -15,6 +15,6 @@ web:
     - '30001:22'
     - '30002:443'
   volumes:
-    - '/Users/gzit000403/gitlab/config:/etc/gitlab'
-    - '/Users/gzit000403/gitlab/logs:/var/log/gitlab'
-    - '/Users/gzit000403/gitlab/data:/var/opt/gitlab'
+    - '$HOME/gitlab/config:/etc/gitlab'
+    - '$HOME/gitlab/logs:/var/log/gitlab'
+    - '$HOME/gitlab/data:/var/opt/gitlab'

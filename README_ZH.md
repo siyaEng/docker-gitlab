@@ -1,4 +1,4 @@
-
+[英文 readme](https://github.com/siyaEng/docker-gitlab/blob/master/README_ZH.md)
 
 ### 编辑 ```.env``` 成你自己的配置
 
